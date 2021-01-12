@@ -1,0 +1,148 @@
+openapi: 3.0.0
+info:
+  version: '1.0.0'
+  title: 'User APIs'
+  description: 'These are apis that are related to user transactions; user authentication and authorizaion,
+    user profile, user posts and more...'
+  contact:
+    name: Palden Sherpa
+    email: sherpalden369@gmail.com
+servers: 
+  - url: http://localhost:5000
+    description: Local Server
+
+paths:
+  /api/user/register:
+    post:
+      tags:
+        - User Authentication
+      description: Register new user.
+      requestBody:
+        required: true
+        content: 
+          application/json:
+            schema:
+              type: object
+              properties:
+                  firstName:
+                      type: string
+                      example: Palden
+                  lastName:
+                      type: string
+                      example: Sherpa
+                  email:
+                      type: string
+                      example: sherpalden369@gmail
+                  password:
+                      type: string
+                      example: Password_123
+                  
+      responses:
+        201:
+          description: Registration Successful.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Registration Successful"
+
+  /api/user/login:
+    post:
+      tags:
+        - User Authentication
+      description: Login User.
+      requestBody:
+        required: true
+        content: 
+          application/json:
+            schema:
+              type: object
+              properties:
+                  email:
+                      type: string
+                      example: sherpalden369@gmail.com
+                  password:
+                      type: string
+                      example: Password_123
+      responses:
+        202:
+          description: Login Successful.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Login Successful
+                  accessToken:
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiJpVFVrS0M4T0IiLCJlbWFpbCI6InNoZXJwYWxkZW4zNjlAZ21haWwuY29tIiwiaWF0IjoxNjAyNTc4MTI2LCJleHAiOjE2MDI2MzgxMjZ9.xI_Y5EGPZP8E0RgAwtdIIDdDvkXF2Zdoa1p0z9nKDbA
+
+  /api/user/forgotPassword:
+    put:
+      tags:
+        - User Authentication
+      description: Process password reset request.
+      requestBody:
+        required: true
+        content: 
+          application/json:
+            schema:
+              type: object
+              properties:
+                  email:
+                      type: string
+                      example: sherpalden369@gmail.com
+      responses:
+        200:
+          description: Password reset request processed and reset link has been sent to the email, sherpalden369@gmail.com
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Password reset request successfully processed and reset link is sent to the email, sherpalden369@gmail.com
+
+  /api/user/resetPassword:
+    put:
+      tags:
+        - User Authentication
+      description: Change old password and set new one.
+      requestBody:
+        required: true
+        content: 
+          application/json:
+            schema:
+              type: object
+              properties:
+                  newPassword:
+                    type: string
+                    example: sherpalden369@gmail.com
+                  resetToken:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiJpVFVrS0M4T0IiLCJlbWFpbCI6InNoZXJwYWxkZW4zNjlAZ21haWwuY29tIiwiaWF0IjoxNjAyNTc4MTI2LCJleHAiOjE2MDI2MzgxMjZ9.xI_Y5EGPZP8E0RgAwtdIIDdDvkXF2Zdoa1p0z9nKDbA
+      responses:
+        200:
+          description: Old password removed and new password set.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Password Reset Successful
+
+
+
+components:
+  securitySchemes:
+    bearerAuth:           
+      type: http
+      scheme: bearer
+      bearerFormat: JWT  

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>auth-app</title>
+		<link rel="stylesheet" href="./css/home.css">
+	</head>
+	<body>
+		<div class="login-form">
+			<h1>Register User</h1>
+			<form id="registerForm" method="POST">
+				<input id="firstName" type="text" name="firstName" placeholder="First name" required>
+				<input id="lastName" type="text" name="lastName" placeholder="Last name" required>
+				<input id="signUpEmail" type="text" name="signUpEmail" placeholder="Email" required>
+				<input id="signUpPassword" type="password" name="signUpPassword" placeholder="Password" required>
+				<input type="submit">
+			</form>
+			<button class="google" id="googleSignUp">SignUp with Google</button>
+			<br><br>
+			<h1>Login User</h1>
+			<form id="loginForm" method="POST">
+				<input id="email" type="text" name="email" placeholder="Email" required>
+				<input id="password" type="password" name="password" placeholder="Password" required>
+				<input type="submit">
+			</form>
+			<button class="google" id="googleLogin">Login with Google</button>
+			<button id="forgotPassword">forgot password?</button>
+		</div>	
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  		<script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
+		<script type="text/javascript" src="./js/login.js"></script>
+	</body>
+</html>
+
